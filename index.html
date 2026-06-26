@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Для мамы ❤️</title>
+<style>
+html,body{margin:0;height:100%;font-family:system-ui,-apple-system,Segoe UI,Georgia,sans-serif;background:linear-gradient(180deg,#fff8f6,#f7ecff);overflow:hidden}
+#fx,#petals{position:fixed;inset:0;pointer-events:none}
+.wrap{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:center;padding:18px}
+.card{background:#ffffffdd;backdrop-filter:blur(8px);border-radius:24px;max-width:420px;width:100%;padding:24px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.15)}
+.env{font-size:78px;cursor:pointer;transition:.5s}.env:hover{transform:scale(1.05)}
+.hidden{display:none}button,a{display:inline-block;margin:10px;padding:14px 22px;border-radius:999px;border:none;background:#cc6f8d;color:#fff;text-decoration:none;font-size:18px}
+.small{font-size:14px;color:#666}
+h1{color:#a45}
+</style></head><body>
+<canvas id="fx"></canvas><div id="petals"></div>
+<div class="wrap"><div class="card">
+<div id="s1"><div class="env" onclick="openEnv()">💌</div><h1>Для самой любимой мамы</h1><p>Нажми на конверт.</p><button onclick="openEnv()">Открыть конверт</button></div>
+<div id="s2" class="hidden"><h1>С Днем рождения! 🌸</h1><p>Мамочка, я очень хотела быть рядом в этот день. Пусть этот подарок подарит тебе красивый вечер, наполненный эмоциями, улыбками и волшебной атмосферой театра. Люблю тебя всем сердцем ❤️</p>
+
+<a href="https://disk.yandex.ru/i/lTBA4_qlJbYdbg" target="_blank">🎁 Открыть подарок</a>
+<p class="small"></p></div>
+</div></div>
+<script>
+function openEnv(){s1.classList.add('hidden');s2.classList.remove('hidden')}
+function toggleMusic(){let m=document.getElementById('music'); if(m.paused)m.play(); else m.pause();}
+const c=document.getElementById('fx'),x=c.getContext('2d');function rs(){c.width=innerWidth;c.height=innerHeight}rs();onresize=rs;
+let pts=[...Array(80)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+1,v:Math.random()+.2}));
+function anim(){x.clearRect(0,0,c.width,c.height);x.fillStyle='rgba(255,215,120,.8)';pts.forEach(p=>{x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill();p.y+=p.v;p.x+=Math.sin(p.y/40)*.2;if(p.y>c.height){p.y=-5;p.x=Math.random()*c.width;}});requestAnimationFrame(anim)}anim();
+setInterval(()=>{let d=document.createElement('div');d.textContent='🌸';d.style.cssText=`position:absolute;left:${Math.random()*100}vw;top:-20px;font-size:${18+Math.random()*18}px;animation:f 8s linear`;petals.appendChild(d);setTimeout(()=>d.remove(),8000)},350);
+let st=document.createElement('style');st.textContent='@keyframes f{to{transform:translate('+(Math.random()*120-60)+'px,110vh) rotate(540deg);opacity:.8}}';document.head.appendChild(st);
+</script></body></html>
